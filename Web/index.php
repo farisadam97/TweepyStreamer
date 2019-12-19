@@ -121,7 +121,24 @@
         var map = new google.maps.Map(document.getElementById('map'), {
           center: surabaya,
           zoom: 14
-        })
+        });
+        var infoWindow = new google.maps.InfoWindow;
+
+        downloadUrl('http://localhost/TweepyStreamer/Web/gmXML.php'),function(data){
+          var xml= data.responseXML;
+          var markers = xml.documentElement.getElementsByTagName('marker');
+
+          Array.prototype.forEach.call(markers,function(markerElem){
+            var idstreamTable = markerElem.getAttribute('id');
+            var jalan = markerElem.getAttribute('jalan');
+            var point = new google.mapsLatLng(
+              parseFloat(markerElem.getAttribute('lat')),
+              parseFloat(markerElem.getAttribute('lng'))
+            );
+            var infowincontent = document.createElement('div');
+            var strong
+          })
+        }
       
         
       
@@ -130,7 +147,7 @@
 
 
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk8_2Z96uO5jHZ0s_GR7gtctXVdFC8iWs&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=[YOUR_KEY]"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
