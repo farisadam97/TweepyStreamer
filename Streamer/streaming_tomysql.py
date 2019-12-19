@@ -19,10 +19,10 @@ from OpenSSL import SSL
 
 # Go to http://apps.twitter.com and create an app.
 # The consumer key and secret will be generated for you after
-consumer_key = 'otvBmeUtfoFekkfuyRdh0i2GC'
-consumer_secret = 'hwVrQC0hcTHQgxXL1xZszK6RUincCEwF7bAF0pxRbqHlkXYJiW'
-access_token = '565999500-L1KN7iPLSQa4kx7Z3jL9BxhAIt3li9WLO9vdsB8B'
-access_token_secret = '3UyMkJOOboNoPwHxOHhtrTiqmsrEuoCn39vXFhXfJjUQS'
+consumer_key = 'YOUR_KEY'
+consumer_secret = 'YOUR_KEY'
+access_token = 'YOUR_KEY'
+access_token_secret = 'YOUR_KEY'
 
 #timezone
 tz = pytz.timezone('Asia/Jakarta')
