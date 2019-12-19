@@ -21,6 +21,7 @@ while ($row =mysqli_fetch_array($result,MYSQLI_ASSOC)){
     $newnode = $parnode->appendChild($node);
     $newnode->setAttribute("id",$row['idstreamTable']);
     $newnode->setAttribute("jalan", $row['jalanName']);
+    $newnode->setAttribute("tgl", $row['dateTweet']);
     $newnode->setAttribute("lat", $row['latLoc']);
     $newnode->setAttribute("lng", $row['lngLoc']);
     $newnode->setAttribute("kategori", $row['category']);
