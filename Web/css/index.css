@@ -1,0 +1,58 @@
+:root{
+    --main-height: 94.2vh;
+}
+
+
+.app{
+    display: flex;
+}
+.main{
+    flex-basis: 40%;
+    display: flex;
+    height: var(--main-height);
+    flex-direction: column;
+    background-color: grey;
+      
+
+}
+
+.post{
+    display: flex;
+    flex-wrap: wrap;
+    padding-top :10px;
+    align-content: flex-start;
+    margin-left: 10px;
+    
+    overflow-y: auto;
+}
+.card-body{
+    width: 80%;
+    margin: auto;
+}
+.post-list{
+    width: 90%;
+    margin-left: 2vh ;
+    margin-bottom: 10px; 
+}
+.post-list:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.map{
+    flex-grow: 1;
+    height: var(--main-height0vh);
+    top: 0;
+    position: sticky;
+    background-color: steelblue;
+}
+
+.card-footer{
+    margin: 0;
+    padding: 0;
+}
+
+.card-body{
+    width: 100%;
+    margin: 10px;
+    padding: 0.5rem;
+}
