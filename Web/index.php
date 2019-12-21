@@ -25,19 +25,15 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
-      <span class="navbar-brand mb-0 h1">Navbar</span>
-    </nav>
+    <?php require ('navbar.php')?>
     <div class="app">
       <div class="main">
+      <h3>Minggu ini di Surabaya</h3>
         <div class="post" id="post-data">
           <?php 
             require('main_q.php');
           ?>
           <?php include('posts.php'); ?>
-          <div class="ajax-load text-center" style="display:none">
-            <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
-        </div>
         </div>
         
       </div>
@@ -246,10 +242,16 @@
     <script>
       var customLabel = {
         Padat: {
-          label: 'P'
+          label: 'P',
+          icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png"
+          }
         },
         Lancar: {
-          label: 'L'
+          label: 'L',
+          icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+          }
         }
       };
 
@@ -286,7 +288,8 @@
               var marker = new google.maps.Marker({
                 map: map,
                 position: point,
-                label: icon.label
+                // label: icon.label,
+                icon: icon.icon
               });
               marker.addListener('click', function() {
                 infoWindow.setContent(infowincontent);

@@ -25,5 +25,7 @@ while ($row =mysqli_fetch_array($result,MYSQLI_ASSOC)){
     $newnode->setAttribute("lat", $row['latLoc']);
     $newnode->setAttribute("lng", $row['lngLoc']);
     $newnode->setAttribute("kategori", $row['category']);
+    $newnode->setAttribute("media", $row['mediaLink']);
+
 }
 echo $dom->saveXML();?>
