@@ -19,10 +19,10 @@ from OpenSSL import SSL
 
 # Go to http://apps.twitter.com and create an app.
 # The consumer key and secret will be generated for you after
-consumer_key = 'YOUR_KEY'
-consumer_secret = 'YOUR_KEY'
-access_token = 'YOUR_KEY'
-access_token_secret = 'YOUR_KEY'
+consumer_key = ''
+consumer_secret = ''
+access_token = ''
+access_token_secret = ''
 
 #timezone
 tz = pytz.timezone('Asia/Jakarta')
@@ -64,6 +64,7 @@ stopwords = ['dishub','pkl','wib','arus','lalu','lintas','terpantau','pantauan',
 #Category
 listLancar = ['ramai','lancar','sepi']
 listPadat = ['peningkatan','volume','padat','macet','kemacetan']
+kondisi =""
 
 #Function for cleaning text
 def clean_text(text):
@@ -88,6 +89,7 @@ def clean_text(text):
     return text.strip()
 #Function for extract road condition
 def extract_kondisi(teks):
+    global kondisi
     if any(word in teks for word in listPadat):
         kondisi = "Padat"
     elif any(word in teks for word in listLancar):
@@ -136,7 +138,6 @@ class StdOutListener(StreamListener):
         # print(data)
         now = datetime.now(tz)
         all_data = json.loads(data)
-        kondisi =""
         try:
             if "extended_tweet" in all_data:
                 textTweet = all_data['extended_tweet']['full_text']
@@ -171,7 +172,11 @@ class StdOutListener(StreamListener):
                 lngLoc = "112.768845"
                 jalanName ="Surabaya"
             print(latLoc,lngLoc)
-            insertIntoMysql(textTweet,tgl,kondisi,jalanName,latLoc,lngLoc,media)            
+            if kondisi is not "":
+                insertIntoMysql(textTweet,tgl,kondisi,jalanName,latLoc,lngLoc,media) 
+            else:
+                pass 
+                print("Stream re-run, nothing passed to AWS RDS ...")
         except Exception as e:
             print(e)
         return True , data
