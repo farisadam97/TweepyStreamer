@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Ajax -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <!-- Chartjs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!-- Bootstrap CSS -->
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
@@ -26,9 +27,9 @@
   </head>
   <body>
     <?php require ('navbar.php')?>
+    <?php include 'db_con.php' ?>
     <div class="app">
       <div class="main">
-      <h3>Minggu ini di Surabaya</h3>
         <div class="post" id="post-data">
           <?php 
             require('main_q.php');
@@ -319,7 +320,127 @@
 
       function doNothing() {}
     </script>
- 
+    <script>
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var chart1 = new Chart(ctx, {
+    // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+          labels: ['Padat', 'Lancar'],
+          datasets: [{
+              label: 'Data Lalu Lintas Mingguan',
+              borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+              ],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+              ],
+              data: [
+                <?php $jumlah_padat_minggu = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE yearweek(DATE(dateTweet), 1) = yearweek(curdate(), 1) AND category = 'Padat'");
+                echo mysqli_num_rows($jumlah_padat_minggu);
+                ?>,
+                <?php $jumlah_lancar_minggu = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE yearweek(DATE(dateTweet), 1) = yearweek(curdate(), 1) AND category = 'Lancar'");
+                echo mysqli_num_rows($jumlah_lancar_minggu);
+                ?>
+                ]
+          }]
+      },
+
+      // Configuration options go here
+      options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 1,
+                    suggestedMax: 15
+                }
+            }]
+        }
+      }
+      });
+      var chart2 = new Chart(document.getElementById('myChart1').getContext('2d'),{
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+          labels: ['Padat', 'Lancar'],
+          datasets: [{
+              label: 'Data Lalu Lintas Bulanan',
+              borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+              ],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+              ],
+              data: [
+                <?php $jumlah_padat_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE MONTH(DATE(dateTweet)) = MONTH(curdate()) AND category = 'Padat'");
+                echo mysqli_num_rows($jumlah_padat_bulan);
+                ?>,
+                <?php $jumlah_lancar_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE YEAR(DATE(dateTweet)) = YEAR(curdate()) AND category = 'Lancar'");
+                echo mysqli_num_rows($jumlah_lancar_bulan);
+                ?>
+                ]
+          }]
+      },
+
+      // Configuration options go here
+      options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 10,
+                    suggestedMax: 100
+                }
+            }]
+        }
+      }
+      });
+      var chart2 = new Chart(document.getElementById('myChart2').getContext('2d'),{
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+          labels: ['Padat', 'Lancar'],
+          datasets: [{
+              label: 'Data Lalu Lintas Mingguan',
+              borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+              ],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+              ],
+              data: [
+                <?php $jumlah_padat_minggu = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE yearweek(DATE(dateTweet), 1) = yearweek(curdate(), 1) AND category = 'Padat'");
+                echo mysqli_num_rows($jumlah_padat_minggu);
+                ?>,
+                <?php $jumlah_lancar_minggu = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE yearweek(DATE(dateTweet), 1) = yearweek(curdate(), 1) AND category = 'Lancar'");
+                echo mysqli_num_rows($jumlah_lancar_minggu);
+                ?>
+                ]
+          }]
+      },
+
+      // Configuration options go here
+      options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 1,
+                    suggestedMax: 15
+                }
+            }]
+        }
+      }
+      });
+    </script>
     <!-- AIzaSyCk8_2Z96uO5jHZ0s_GR7gtctXVdFC8iWs -->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk8_2Z96uO5jHZ0s_GR7gtctXVdFC8iWs&callback=initMap">
