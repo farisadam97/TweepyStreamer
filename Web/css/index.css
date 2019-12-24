@@ -34,13 +34,10 @@
     margin-left: 2vh ;
     margin-bottom: 10px; 
 }
-.post-list:hover{
-    transform: scale(1.05);
-    cursor: pointer;
-}
+
 .map{
     flex-grow: 1;
-    height: var(--main-height0vh);
+    height: var(--main-height);
     top: 0;
     position: sticky;
     background-color: steelblue;
