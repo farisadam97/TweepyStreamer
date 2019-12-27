@@ -239,7 +239,7 @@
       }
       function doNothing() {}
     </script> -->
-
+    <!-- Google Maps Script -->
     <script>
       var customLabel = {
         Padat: {
@@ -320,17 +320,18 @@
 
       function doNothing() {}
     </script>
+    <!-- Chart for condition -->
     <script>
       var ctx = document.getElementById('myChart').getContext('2d');
       var chart1 = new Chart(ctx, {
-    // The type of chart we want to create
+      // The type of chart we want to create
       type: 'bar',
 
       // The data for our dataset
       data: {
           labels: ['Padat', 'Lancar'],
           datasets: [{
-              label: 'Data Lalu Lintas Mingguan',
+              label: 'Data Lalu Lintas Minggu ini',
               borderColor: [
                 'rgba(255,99,132,1)',
                 'rgba(54, 162, 235, 1)'
@@ -369,7 +370,7 @@
         data: {
           labels: ['Padat', 'Lancar'],
           datasets: [{
-              label: 'Data Lalu Lintas Bulanan',
+              label: 'Data Lalu Lintas Bulan ini',
               borderColor: [
                 'rgba(255,99,132,1)',
                 'rgba(54, 162, 235, 1)'
@@ -379,10 +380,10 @@
                 'rgba(54, 162, 235, 0.2)'
               ],
               data: [
-                <?php $jumlah_padat_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE MONTH(DATE(dateTweet)) = MONTH(curdate()) AND category = 'Padat'");
+                <?php $jumlah_padat_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE MONTH(DATE(dateTweet)) = MONTH(curdate()) AND YEAR(DATE(dateTweet)) = YEAR(curdate()) AND category = 'Padat'");
                 echo mysqli_num_rows($jumlah_padat_bulan);
                 ?>,
-                <?php $jumlah_lancar_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE YEAR(DATE(dateTweet)) = YEAR(curdate()) AND category = 'Lancar'");
+                <?php $jumlah_lancar_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE MONTH(DATE(dateTweet)) = MONTH(curdate()) AND YEAR(DATE(dateTweet)) = YEAR(curdate()) AND category = 'Lancar'");
                 echo mysqli_num_rows($jumlah_lancar_bulan);
                 ?>
                 ]
@@ -408,7 +409,7 @@
         data: {
           labels: ['Padat', 'Lancar'],
           datasets: [{
-              label: 'Data Lalu Lintas Mingguan',
+              label: 'Data Lalu Lintas Tahun ini',
               borderColor: [
                 'rgba(255,99,132,1)',
                 'rgba(54, 162, 235, 1)'
@@ -418,11 +419,11 @@
                 'rgba(54, 162, 235, 0.2)'
               ],
               data: [
-                <?php $jumlah_padat_minggu = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE yearweek(DATE(dateTweet), 1) = yearweek(curdate(), 1) AND category = 'Padat'");
-                echo mysqli_num_rows($jumlah_padat_minggu);
+                <?php $jumlah_padat_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE  YEAR(DATE(dateTweet)) = YEAR(curdate()) AND category = 'Padat'");
+                echo mysqli_num_rows($jumlah_padat_bulan);
                 ?>,
-                <?php $jumlah_lancar_minggu = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE yearweek(DATE(dateTweet), 1) = yearweek(curdate(), 1) AND category = 'Lancar'");
-                echo mysqli_num_rows($jumlah_lancar_minggu);
+                <?php $jumlah_lancar_bulan = mysqli_query($mysqli,"SELECT * FROM streamTable WHERE  YEAR(DATE(dateTweet)) = YEAR(curdate()) AND category = 'Lancar'");
+                echo mysqli_num_rows($jumlah_lancar_bulan);
                 ?>
                 ]
           }]

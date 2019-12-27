@@ -114,11 +114,11 @@ def insertIntoMysql(textTweet,dateTweet,category,jalanName,latLoc,lngLoc,media):
         cursorObject = connectionObject.cursor()
         sql = """
             INSERT INTO streamTable 
-            (textTweet,dateTweet,category,jalanName,latLoc,lngLoc) 
+            (textTweet,dateTweet,category,jalanName,latLoc,lngLoc,mediaLink) 
             VALUES 
-            (%s,%s,%s,%s,%s,%s)
+            (%s,%s,%s,%s,%s,%s,%s)
             """
-        recordTuple = (textTweet,dateTweet,category,jalanName,latLoc,lngLoc)
+        recordTuple = (textTweet,dateTweet,category,jalanName,latLoc,lngLoc,media)
         cursorObject.execute(sql,recordTuple)
         connectionObject.commit()
         print("Date entered to AWS RDS ")
